@@ -26,13 +26,15 @@ export default function Incidents() {
   async function getIncidentsFromApi() {
     if (loading) return;
 
-    if(total > 0 && incident.length === total) return;
+    if (total > 0 && incident.length === total) return;
 
     setLoading(true);
 
-    const getIncidentsFromApiResponse = await api.get('incidents', {params: {
-      page: currentPage
-    }});
+    const getIncidentsFromApiResponse = await api.get("incidents", {
+      params: {
+        page: currentPage
+      }
+    });
 
     setIncidents([...incidents, ...getIncidentsFromApiResponse.data]);
     setTotal(response.headers["x-total-count"]);
@@ -45,7 +47,7 @@ export default function Incidents() {
       <View style={styles.header}>
         <Image source={logoImg} />
         <Text style={styles.headerText}>
-          Total de <Text style={styles.headerTextBold}> casos</Text>.
+          Total de <Text style={styles.headerTextBold}>{total}</Text> casos.
         </Text>
       </View>
 
